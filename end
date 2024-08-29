@@ -1,0 +1,306 @@
+[1mdiff --git a/Classe.py b/Classe.py[m
+[1mindex a4f0e8d..1c81cf3 100644[m
+[1m--- a/Classe.py[m
+[1m+++ b/Classe.py[m
+[36m@@ -1,41 +1,108 @@[m
+[31m-import inquirer[m
+[31m-[m
+[32m+[m[32m# classe.py[m
+ [m
+ class Questao:[m
+[31m-    def __init__(self, id, titulo, nivel_dificuldade, tipo_programacao, tema, tamanho_codigo, qualidade_codigo):[m
+[31m-        self.id = id[m
+[31m-        self.titulo = titulo[m
+[31m-        self.nivel_dificuldade = nivel_dificuldade[m
+[31m-        self.tipo_programacao = tipo_programacao[m
+[31m-        self.tema = tema[m
+[31m-        self.tamanho_codigo = tamanho_codigo[m
+[31m-        self.qualidade_codigo = qualidade_codigo[m
+[32m+[m[32m    def __init__(self, id, titulo, nivel_dificuldade, tipo_programacao, tema, tamanho_codigo, qualidade_codigo, imagem=None):[m
+[32m+[m[32m        self._id = id[m
+[32m+[m[32m        self._titulo = titulo[m
+[32m+[m[32m        self._nivel_dificuldade = nivel_dificuldade[m
+[32m+[m[32m        self._tipo_programacao = tipo_programacao[m
+[32m+[m[32m        self._tema = tema[m
+[32m+[m[32m        self._tamanho_codigo = tamanho_codigo[m
+[32m+[m[32m        self._qualidade_codigo = qualidade_codigo[m
+[32m+[m[32m        self._imagem = imagem  # Adicionando a nova variável de imagem[m
+[32m+[m
+[32m+[m[32m        # Adicione um breakpoint aqui para depurar a inicialização[m
+[32m+[m[32m        breakpoint()[m
+ [m
+     def __str__(self):[m
+[31m-        return (f"Questao ID: {self.id}\n"[m
+[31m-                f"Título: {self.titulo}\n"[m
+[31m-                f"Nível de Dificuldade: {self.nivel_dificuldade}\n"[m
+[31m-                f"Tipo de Programação: {self.tipo_programacao}\n"[m
+[31m-                f"Tema: {self.tema}\n"[m
+[31m-                f"Tamanho do Código: {self.tamanho_codigo}\n"[m
+[31m-                f"Qualidade do Código: {self.qualidade_codigo} estrelas\n")[m
+[31m-[m
+[31m-    def avaliar_questao(self, nova_qualidade):[m
+[31m-        if 1 <= nova_qualidade <= 5:[m
+[31m-            self.qualidade_codigo = nova_qualidade[m
+[31m-        else:[m
+[31m-            raise ValueError("A qualidade deve estar entre 1 e 5 estrelas")[m
+[31m-[m
+[31m-    def atualizar_dificuldade(self, nova_dificuldade):[m
+[31m-        if 1 <= nova_dificuldade <= 5:[m
+[31m-            self.nivel_dificuldade = nova_dificuldade[m
+[31m-        else:[m
+[31m-            raise ValueError("O nível de dificuldade deve estar entre 1 e 5")[m
+[31m-[m
+[31m-[m
+[31m-# Função que cria o menu interativo para configurar a questão[m
+[31m-def menu_interativo():[m
+[31m-    # Configurando a questão[m
+[32m+[m[32m        imagem_str = f"\nImagem: {self._imagem}" if self._imagem else "\nNenhuma imagem disponível"[m
+[32m+[m[32m        return (f"Questao ID: {self._id}\n"[m
+[32m+[m[32m                f"Título: {self._titulo}\n"[m
+[32m+[m[32m                f"Nível de Dificuldade: {self._nivel_dificuldade}\n"[m
+[32m+[m[32m                f"Tipo de Programação: {self._tipo_programacao}\n"[m
+[32m+[m[32m                f"Tema: {self._tema}\n"[m
+[32m+[m[32m                f"Tamanho do Código: {self._tamanho_codigo}\n"[m
+[32m+[m[32m                f"Qualidade do Código: {self._qualidade_codigo} estrelas"[m
+[32m+[m[32m                f"{imagem_str}\n")[m
+[32m+[m
+[32m+[m[32m    # Getters e Setters[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def id(self):[m
+[32m+[m[32m        return self._id[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def titulo(self):[m
+[32m+[m[32m        return self._titulo[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def nivel_dificuldade(self):[m
+[32m+[m[32m        return self._nivel_dificuldade[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def tipo_programacao(self):[m
+[32m+[m[32m        return self._tipo_programacao[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def tema(self):[m
+[32m+[m[32m        return self._tema[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def tamanho_codigo(self):[m
+[32m+[m[32m        return self._tamanho_codigo[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def qualidade_codigo(self):[m
+[32m+[m[32m        return self._qualidade_codigo[m
+[32m+[m
+[32m+[m[32m    @property[m
+[32m+[m[32m    def imagem(self):[m
+[32m+[m[32m        return self._imagem[m
+[32m+[m
+[32m+[m[32m    @id.setter[m
+[32m+[m[32m    def id(self, valor):[m
+[32m+[m[32m        self._id = valor[m
+[32m+[m
+[32m+[m[32m    @titulo.setter[m
+[32m+[m[32m    def titulo(self, valor):[m
+[32m+[m[32m        self._titulo = valor[m
+[32m+[m
+[32m+[m[32m    @nivel_dificuldade.setter[m
+[32m+[m[32m    def nivel_dificuldade(self, valor):[m
+[32m+[m[32m        self._nivel_dificuldade = valor[m
+[32m+[m
+[32m+[m[32m    @tipo_programacao.setter[m
+[32m+[m[32m    def tipo_programacao(self, valor):[m
+[32m+[m[32m        self._tipo_programacao = valor[m
+[32m+[m
+[32m+[m[32m    @tema.setter[m
+[32m+[m[32m    def tema(self, valor):[m
+[32m+[m[32m        self._tema = valor[m
+[32m+[m
+[32m+[m[32m    @tamanho_codigo.setter[m
+[32m+[m[32m    def tamanho_codigo(self, valor):[m
+[32m+[m[32m        self._tamanho_codigo = valor[m
+[32m+[m
+[32m+[m[32m    @qualidade_codigo.setter[m
+[32m+[m[32m    def qualidade_codigo(self, valor):[m
+[32m+[m[32m        self._qualidade_codigo = valor[m
+[32m+[m
+[32m+[m[32m    @imagem.setter[m
+[32m+[m[32m    def imagem(self, valor):[m
+[32m+[m[32m        self._imagem = valor[m
+[32m+[m
+[32m+[m[32m    # Método para configurar a questão usando o menu[m
+[32m+[m[32m    def configurar_questao(self):[m
+[32m+[m[32m        # Adicione um breakpoint aqui para depurar antes de chamar o menu[m
+[32m+[m[32m        breakpoint()[m
+[32m+[m[32m        from menu import menu_interativo  # Importa a função menu_interativo aqui[m
+[32m+[m[32m        # Chama o menu interativo para configurar a questão[m
+[32m+[m[32m        menu_interativo(self)[m
+[32m+[m
+[32m+[m
+[32m+[m[32m# Exemplo de uso[m
+[32m+[m[32mif __name__ == "__main__":[m
+[32m+[m[32m    # Adicione um breakpoint aqui para depurar antes de criar a instância de Questao[m
+[32m+[m[32m    breakpoint()[m
+     questao = Questao([m
+         id=1,[m
+         titulo="Questão de Exemplo",[m
+[36m@@ -43,74 +110,8 @@[m [mdef menu_interativo():[m
+         tipo_programacao="",[m
+         tema="",[m
+         tamanho_codigo="",[m
+[31m-        qualidade_codigo=0[m
+[32m+[m[32m        qualidade_codigo=0,[m
+[32m+[m[32m        imagem="caminho/para/imagem.jpg"  # Exemplo de caminho de imagem[m
+     )[m
+[31m-[m
+[31m-    # Perguntar o nível de dificuldade[m
+[31m-    nivel_pergunta = [[m
+[31m-        inquirer.List([m
+[31m-            'nivel_dificuldade',[m
+[31m-            message="Selecione o Nível de Dificuldade",[m
+[31m-            choices=['1 - Muito Fácil', '2 - Fácil',[m
+[31m-                     '3 - Médio', '4 - Difícil', '5 - Muito Difícil'],[m
+[31m-        ),[m
+[31m-    ][m
+[31m-    nivel_resposta = inquirer.prompt(nivel_pergunta)[m
+[31m-    questao.nivel_dificuldade = int([m
+[31m-        nivel_resposta['nivel_dificuldade'].split(' ')[0])[m
+[31m-[m
+[31m-    # Perguntar o tipo de programação[m
+[31m-    tipo_pergunta = [[m
+[31m-        inquirer.List([m
+[31m-            'tipo_programacao',[m
+[31m-            message="Selecione o Tipo de Programação",[m
+[31m-            choices=['Python', 'Java', 'C++',[m
+[31m-                     'JavaScript', 'C#', 'Ruby', 'PHP'],[m
+[31m-        ),[m
+[31m-    ][m
+[31m-    tipo_resposta = inquirer.prompt(tipo_pergunta)[m
+[31m-    questao.tipo_programacao = tipo_resposta['tipo_programacao'][m
+[31m-[m
+[31m-    # Perguntar o tema[m
+[31m-    tema_pergunta = [[m
+[31m-        inquirer.List([m
+[31m-            'tema',[m
+[31m-            message="Selecione o Tema",[m
+[31m-            choices=['Estruturas de Controle', 'Estruturas de Dados',[m
+[31m-                     'Funções e Procedimentos', 'POO'],[m
+[31m-        ),[m
+[31m-    ][m
+[31m-    tema_resposta = inquirer.prompt(tema_pergunta)[m
+[31m-    questao.tema = tema_resposta['tema'][m
+[31m-[m
+[31m-    # Perguntar o tamanho do código[m
+[31m-    tamanho_pergunta = [[m
+[31m-        inquirer.List([m
+[31m-            'tamanho_codigo',[m
+[31m-            message="Selecione o Tamanho do Código",[m
+[31m-            choices=['pequeno', 'médio', 'grande'],[m
+[31m-        ),[m
+[31m-    ][m
+[31m-    tamanho_resposta = inquirer.prompt(tamanho_pergunta)[m
+[31m-    questao.tamanho_codigo = tamanho_resposta['tamanho_codigo'][m
+[31m-[m
+[31m-    # Perguntar a qualidade do código[m
+[31m-    qualidade_pergunta = [[m
+[31m-        inquirer.List([m
+[31m-            'qualidade_codigo',[m
+[31m-            message="Selecione a Qualidade do Código",[m
+[31m-            choices=['1 - Muito Ruim', '2 - Ruim',[m
+[31m-                     '3 - Médio', '4 - Bom', '5 - Excelente'],[m
+[31m-        ),[m
+[31m-    ][m
+[31m-    qualidade_resposta = inquirer.prompt(qualidade_pergunta)[m
+[31m-    questao.qualidade_codigo = int([m
+[31m-        qualidade_resposta['qualidade_codigo'].split(' ')[0])[m
+[31m-[m
+[31m-    # Exibir o resultado[m
+[31m-    print("\nQuestão configurada:")[m
+[31m-    print(questao)[m
+[31m-[m
+[31m-[m
+[31m-if __name__ == "__main__":[m
+[31m-    menu_interativo()[m
+[32m+[m[32m    questao.configurar_questao()[m
+[32m+[m[32m    print(questao)[m
+\ No newline at end of file[m
+[1mdiff --git a/menu.py b/menu.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ff1b975[m
+[1m--- /dev/null[m
+[1m+++ b/menu.py[m
+[36m@@ -0,0 +1,73 @@[m
+[32m+[m[32m# menu.py[m
+[32m+[m[32mimport inquirer[m[41m [m
+[32m+[m[32mfrom typing import Any  # Para evitar importação circular, usamos Any[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef menu_interativo(questao: Any):[m
+[32m+[m[32m    # Adicione um breakpoint aqui para depurar ao iniciar o menu interativo[m
+[32m+[m[32m    breakpoint()[m
+[32m+[m
+[32m+[m[32m    # Perguntar o nível de dificuldade[m
+[32m+[m[32m    nivel_pergunta = [[m
+[32m+[m[32m        inquirer.List([m
+[32m+[m[32m            'nivel_dificuldade',[m
+[32m+[m[32m            message="Selecione o Nível de Dificuldade",[m
+[32m+[m[32m            choices=['1 - Muito Fácil', '2 - Fácil',[m
+[32m+[m[32m                     '3 - Médio', '4 - Difícil', '5 - Muito Difícil'],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m    ][m
+[32m+[m[32m    nivel_resposta = inquirer.prompt(nivel_pergunta)[m
+[32m+[m[32m    questao.nivel_dificuldade = int([m
+[32m+[m[32m        nivel_resposta['nivel_dificuldade'].split(' ')[0])[m
+[32m+[m
+[32m+[m[32m    # Perguntar o tipo de programação[m
+[32m+[m[32m    tipo_pergunta = [[m
+[32m+[m[32m        inquirer.List([m
+[32m+[m[32m            'tipo_programacao',[m
+[32m+[m[32m            message="Selecione o Tipo de Programação",[m
+[32m+[m[32m            choices=['Python', 'Java', 'C++',[m
+[32m+[m[32m                     'JavaScript', 'C#', 'Ruby', 'PHP'],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m    ][m
+[32m+[m[32m    tipo_resposta = inquirer.prompt(tipo_pergunta)[m
+[32m+[m[32m    questao.tipo_programacao = tipo_resposta['tipo_programacao'][m
+[32m+[m
+[32m+[m[32m    # Perguntar o tema[m
+[32m+[m[32m    tema_pergunta = [[m
+[32m+[m[32m        inquirer.List([m
+[32m+[m[32m            'tema',[m
+[32m+[m[32m            message="Selecione o Tema",[m
+[32m+[m[32m            choices=['Estruturas de Controle', 'Estruturas de Dados',[m
+[32m+[m[32m                     'Funções e Procedimentos', 'POO'],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m    ][m
+[32m+[m[32m    tema_resposta = inquirer.prompt(tema_pergunta)[m
+[32m+[m[32m    questao.tema = tema_resposta['tema'][m
+[32m+[m
+[32m+[m[32m    # Perguntar o tamanho do código[m
+[32m+[m[32m    tamanho_pergunta = [[m
+[32m+[m[32m        inquirer.List([m
+[32m+[m[32m            'tamanho_codigo',[m
+[32m+[m[32m            message="Selecione o Tamanho do Código",[m
+[32m+[m[32m            choices=['pequeno', 'médio', 'grande'],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m    ][m
+[32m+[m[32m    tamanho_resposta = inquirer.prompt(tamanho_pergunta)[m
+[32m+[m[32m    questao.tamanho_codigo = tamanho_resposta['tamanho_codigo'][m
+[32m+[m
+[32m+[m[32m    # Perguntar a qualidade do código[m
+[32m+[m[32m    qualidade_pergunta = [[m
+[32m+[m[32m        inquirer.List([m
+[32m+[m[32m            'qualidade_codigo',[m
+[32m+[m[32m            message="Selecione a Qualidade do Código",[m
+[32m+[m[32m            choices=['1 - Muito Ruim', '2 - Ruim',[m
+[32m+[m[32m                     '3 - Médio', '4 - Bom', '5 - Excelente'],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m    ][m
+[32m+[m[32m    qualidade_resposta = inquirer.prompt(qualidade_pergunta)[m
+[32m+[m[32m    questao.qualidade_codigo = int([m
+[32m+[m[32m        qualidade_resposta['qualidade_codigo'].split(' ')[0])[m
+[32m+[m
+[32m+[m[32m    # Exibir o resultado[m
+[32m+[m[32m    print("\nQuestão configurada:")[m
+[32m+[m[32m    print(questao)[m

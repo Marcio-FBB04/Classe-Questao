@@ -1,41 +1,109 @@
-import inquirer
-
+# classe.py
+#olá
 
 class Questao:
-    def __init__(self, id, titulo, nivel_dificuldade, tipo_programacao, tema, tamanho_codigo, qualidade_codigo):
-        self.id = id
-        self.titulo = titulo
-        self.nivel_dificuldade = nivel_dificuldade
-        self.tipo_programacao = tipo_programacao
-        self.tema = tema
-        self.tamanho_codigo = tamanho_codigo
-        self.qualidade_codigo = qualidade_codigo
+    def __init__(self, id, titulo, nivel_dificuldade, tipo_programacao, tema, tamanho_codigo, qualidade_codigo, imagem=None):
+        self._id = id
+        self._titulo = titulo
+        self._nivel_dificuldade = nivel_dificuldade
+        self._tipo_programacao = tipo_programacao
+        self._tema = tema
+        self._tamanho_codigo = tamanho_codigo
+        self._qualidade_codigo = qualidade_codigo
+        self._imagem = imagem  # Adicionando a nova variável de imagem
+
+        # Adicione um breakpoint aqui para depurar a inicialização
+        breakpoint()
 
     def __str__(self):
-        return (f"Questao ID: {self.id}\n"
-                f"Título: {self.titulo}\n"
-                f"Nível de Dificuldade: {self.nivel_dificuldade}\n"
-                f"Tipo de Programação: {self.tipo_programacao}\n"
-                f"Tema: {self.tema}\n"
-                f"Tamanho do Código: {self.tamanho_codigo}\n"
-                f"Qualidade do Código: {self.qualidade_codigo} estrelas\n")
+        imagem_str = f"\nImagem: {self._imagem}" if self._imagem else "\nNenhuma imagem disponível"
+        return (f"Questao ID: {self._id}\n"
+                f"Título: {self._titulo}\n"
+                f"Nível de Dificuldade: {self._nivel_dificuldade}\n"
+                f"Tipo de Programação: {self._tipo_programacao}\n"
+                f"Tema: {self._tema}\n"
+                f"Tamanho do Código: {self._tamanho_codigo}\n"
+                f"Qualidade do Código: {self._qualidade_codigo} estrelas"
+                f"{imagem_str}\n")
 
-    def avaliar_questao(self, nova_qualidade):
-        if 1 <= nova_qualidade <= 5:
-            self.qualidade_codigo = nova_qualidade
-        else:
-            raise ValueError("A qualidade deve estar entre 1 e 5 estrelas")
+    # Getters e Setters
+    @property
+    def id(self):
+        return self._id
 
-    def atualizar_dificuldade(self, nova_dificuldade):
-        if 1 <= nova_dificuldade <= 5:
-            self.nivel_dificuldade = nova_dificuldade
-        else:
-            raise ValueError("O nível de dificuldade deve estar entre 1 e 5")
+    @property
+    def titulo(self):
+        return self._titulo
+
+    @property
+    def nivel_dificuldade(self):
+        return self._nivel_dificuldade
+
+    @property
+    def tipo_programacao(self):
+        return self._tipo_programacao
+
+    @property
+    def tema(self):
+        return self._tema
+
+    @property
+    def tamanho_codigo(self):
+        return self._tamanho_codigo
+
+    @property
+    def qualidade_codigo(self):
+        return self._qualidade_codigo
+
+    @property
+    def imagem(self):
+        return self._imagem
+
+    @id.setter
+    def id(self, valor):
+        self._id = valor
+
+    @titulo.setter
+    def titulo(self, valor):
+        self._titulo = valor
+
+    @nivel_dificuldade.setter
+    def nivel_dificuldade(self, valor):
+        self._nivel_dificuldade = valor
+
+    @tipo_programacao.setter
+    def tipo_programacao(self, valor):
+        self._tipo_programacao = valor
+
+    @tema.setter
+    def tema(self, valor):
+        self._tema = valor
+
+    @tamanho_codigo.setter
+    def tamanho_codigo(self, valor):
+        self._tamanho_codigo = valor
+
+    @qualidade_codigo.setter
+    def qualidade_codigo(self, valor):
+        self._qualidade_codigo = valor
+
+    @imagem.setter
+    def imagem(self, valor):
+        self._imagem = valor
+
+    # Método para configurar a questão usando o menu
+    def configurar_questao(self):
+        # Adicione um breakpoint aqui para depurar antes de chamar o menu
+        breakpoint()
+        from menu import menu_interativo  # Importa a função menu_interativo aqui
+        # Chama o menu interativo para configurar a questão
+        menu_interativo(self)
 
 
-# Função que cria o menu interativo para configurar a questão
-def menu_interativo():
-    # Configurando a questão
+# Exemplo de uso
+if __name__ == "__main__":
+    # Adicione um breakpoint aqui para depurar antes de criar a instância de Questao
+    breakpoint()
     questao = Questao(
         id=1,
         titulo="Questão de Exemplo",
@@ -43,74 +111,8 @@ def menu_interativo():
         tipo_programacao="",
         tema="",
         tamanho_codigo="",
-        qualidade_codigo=0
+        qualidade_codigo=0,
+        imagem="caminho/para/imagem.jpg"  # Exemplo de caminho de imagem
     )
-
-    # Perguntar o nível de dificuldade
-    nivel_pergunta = [
-        inquirer.List(
-            'nivel_dificuldade',
-            message="Selecione o Nível de Dificuldade",
-            choices=['1 - Muito Fácil', '2 - Fácil',
-                     '3 - Médio', '4 - Difícil', '5 - Muito Difícil'],
-        ),
-    ]
-    nivel_resposta = inquirer.prompt(nivel_pergunta)
-    questao.nivel_dificuldade = int(
-        nivel_resposta['nivel_dificuldade'].split(' ')[0])
-
-    # Perguntar o tipo de programação
-    tipo_pergunta = [
-        inquirer.List(
-            'tipo_programacao',
-            message="Selecione o Tipo de Programação",
-            choices=['Python', 'Java', 'C++',
-                     'JavaScript', 'C#', 'Ruby', 'PHP'],
-        ),
-    ]
-    tipo_resposta = inquirer.prompt(tipo_pergunta)
-    questao.tipo_programacao = tipo_resposta['tipo_programacao']
-
-    # Perguntar o tema
-    tema_pergunta = [
-        inquirer.List(
-            'tema',
-            message="Selecione o Tema",
-            choices=['Estruturas de Controle', 'Estruturas de Dados',
-                     'Funções e Procedimentos', 'POO'],
-        ),
-    ]
-    tema_resposta = inquirer.prompt(tema_pergunta)
-    questao.tema = tema_resposta['tema']
-
-    # Perguntar o tamanho do código
-    tamanho_pergunta = [
-        inquirer.List(
-            'tamanho_codigo',
-            message="Selecione o Tamanho do Código",
-            choices=['pequeno', 'médio', 'grande'],
-        ),
-    ]
-    tamanho_resposta = inquirer.prompt(tamanho_pergunta)
-    questao.tamanho_codigo = tamanho_resposta['tamanho_codigo']
-
-    # Perguntar a qualidade do código
-    qualidade_pergunta = [
-        inquirer.List(
-            'qualidade_codigo',
-            message="Selecione a Qualidade do Código",
-            choices=['1 - Muito Ruim', '2 - Ruim',
-                     '3 - Médio', '4 - Bom', '5 - Excelente'],
-        ),
-    ]
-    qualidade_resposta = inquirer.prompt(qualidade_pergunta)
-    questao.qualidade_codigo = int(
-        qualidade_resposta['qualidade_codigo'].split(' ')[0])
-
-    # Exibir o resultado
-    print("\nQuestão configurada:")
+    questao.configurar_questao()
     print(questao)
-
-
-if __name__ == "__main__":
-    menu_interativo()
